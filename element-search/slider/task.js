@@ -11,7 +11,7 @@ function sliderPosition(currentIndex, nextIndex) {
 
 for (const arrow of arrows) {
   arrow.onclick = () => {
-    let currentIndex = allSliderItems.indexOf(...allSliderItems.filter(item => item.classList.contains('slider__item_active')));
+    let currentIndex = allSliderItems.findIndex((item => item.classList.contains('slider__item_active')));
     let nextIndex;
 
     if (arrow.classList.contains('slider__arrow_next')) {
@@ -24,7 +24,7 @@ for (const arrow of arrows) {
 }
 allDots.forEach((dot, index) => {
   dot.onclick = () => {
-    let currentIndex = allDots.indexOf(...allDots.filter(item => item.classList.contains('slider__dot_active')));
+    let currentIndex = allDots.findIndex((item => item.classList.contains('slider__dot_active')));
     if (currentIndex === -1) {
       currentIndex = 0;
     }
