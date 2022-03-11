@@ -6,7 +6,7 @@ dropdownValue.addEventListener('click', (event) => {
 dropdownList.addEventListener('click', (event) => {
   event.preventDefault();
   const {target} = event;
-  const isDropdowmLink = target.closest('ul.dropdown__list');
+  const isDropdowmLink = target.closest('a.dropdown__link');
   if (isDropdowmLink) {
     dropdownValue.textContent = target.textContent;
     dropdownList.classList.remove('dropdown__list_active');

@@ -5,6 +5,7 @@ function createElement (text) {
   return element;
 }
 
+
 const allLinks = document.querySelectorAll('.has-tooltip');
 
 for (const link of allLinks) {
@@ -26,8 +27,7 @@ for (const link of allLinks) {
 
     link.style.position = 'relative';
     tooltip.style.position = 'absolute';
-    let positionTooltip = 'bottom';
-    tooltip.dataset.position = positionTooltip;
+    let positionTooltip = link.dataset.position;
     switch (positionTooltip) {
       case 'top':
         tooltip.style.top = `-${tooltip.offsetHeight}px`;

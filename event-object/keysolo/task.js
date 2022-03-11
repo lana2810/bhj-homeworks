@@ -50,6 +50,7 @@ class Game {
     const word = this.getWord();
 
     this.renderWord(word);
+    
     this.timerText.textContent = +this.wordElement.textContent.length;
     const timer = setInterval(() => {
       this.timerText.textContent -= 1;

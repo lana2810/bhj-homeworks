@@ -1,11 +1,12 @@
 const allDecInc = document.querySelectorAll('.product__quantity-control');
 const allProductAdd = document.querySelectorAll('.product__add');
 
+
 allDecInc.forEach((decInc) => {
   decInc.onclick = function() {
     const value = decInc.closest('.product__quantity-controls').querySelector('.product__quantity-value');
-    if (decInc.classList.contains('product__quantity-control_dec') && +value.textContent === 0) {
-      value.textContent = 0;
+    if (decInc.classList.contains('product__quantity-control_dec') && +value.textContent === 1) {
+      value.textContent = 1;
     } else {
       value.textContent = decInc.classList.contains('product__quantity-control_dec') ? (+value.textContent - 1) : (+value.textContent + 1);
     }
@@ -17,7 +18,7 @@ allProductAdd.forEach((productAdd) => {
   const id  = productAdd.closest('.product').dataset.id;
   const imgSrc = productAdd.closest('.product').querySelector('.product__image').src;
   const count = productAdd.closest('.product').querySelector('.product__quantity-value').textContent;
-  createCartProduct(id, imgSrc, +count)
+  createCartProduct(id, imgSrc, +count);
   }
 })
 
