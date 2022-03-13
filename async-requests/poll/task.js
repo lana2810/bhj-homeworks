@@ -4,11 +4,16 @@ let idRequest;
 let answers;
 let indexAnswer;
 
+// function request (method, url) {
+//   const xhr = new XMLHttpRequest();
+//   xhr.open(method, url);
+// }
+
 const xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://netology-slow-rest.herokuapp.com/poll.php');
 xhr.send();
-xhr.addEventListener('readystatechange', () => {
-  if (xhr.readyState === xhr.DONE) {
+xhr.onreadystatechange = () => {
+  if (xhr.readyState === xhr.DONE && xhr.status == 200) {
     let responseObj = JSON.parse(xhr.response);
     idRequest = responseObj.id;
     pollTitle.textContent = responseObj.data.title;
@@ -20,7 +25,7 @@ xhr.addEventListener('readystatechange', () => {
       pollAnswers.append(btn);
     })
   }
-})
+}
 
 pollAnswers.addEventListener('click', event => {
   alert('Спасибо, ваш голос засчитан!');
@@ -31,16 +36,17 @@ pollAnswers.addEventListener('click', event => {
   xhr1.responseType = 'json';
   xhr1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   xhr1.send(`vote=${idRequest}&answer=${indexAnswer}`);
-  xhr1.addEventListener('readystatechange', () => {
-    if (xhr1.readyState === xhr1.DONE) {
+  xhr1.onreadystatechange = () => {
+    if (xhr1.readyState === xhr1.DONE && xhr.status == 200) {
       pollAnswers.style.visibility = 'hidden';
       const arr = xhr1.response.stat;
       const sum = arr.reduce((sum, current) => sum + current.votes, 0);
       arr.forEach(item => {
         const statHtml = document.createElement('div');
-        statHtml.innerHTML = `<strong> ${item.answer}: ${(item.votes * 100 / sum).toFixed(2)}%`;
+        statHtml.textContent = `${item.answer}: ${(item.votes * 100 / sum).toFixed(2)}%`;
+        statHtml.style.fontWeight = 'bold';
         pollTitle.append(statHtml);
       })
     }
-  })
+  }
 })
