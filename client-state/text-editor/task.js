@@ -1,15 +1,13 @@
 const textArea = document.querySelector('#editor');
 const btn = document.querySelector('.button');
-const contentText = localStorage.getItem('text');
 
-if (contentText) {
-  textArea.value = contentText;
-} else {
-  textArea.addEventListener('change', () => {
-    localStorage.setItem('text', textArea.value);
-  })
-}
+textArea.value = localStorage.getItem('text');
+
+textArea.addEventListener('input', () => {
+  localStorage.setItem('text', textArea.value);
+});
+
 btn.addEventListener('click', () => {
-  localStorage.clear();
-  window.location.reload();
-})
+  localStorage.removeItem('text');
+  textArea.value = '';
+});
